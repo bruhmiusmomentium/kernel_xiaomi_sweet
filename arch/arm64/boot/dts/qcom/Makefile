@@ -1,7 +1,7 @@
-ifeq ($(CONFIG_MACH_XIAOMI),y)
+ifeq ($(CONFIG_MATCH_XIAOMI),y)
 ifeq ($(CONFIG_BUILD_ARM64_DT_OVERLAY),y)
 
-dtbo-$(CONFIG_MACH_XIAOMI_SWEET) += sweet-sdmmagpie-overlay.dtbo
+dtbo-$(CONFIG_MATCH_XIAOMI_SWEET) += sweet-sdmmagpie-overlay.dtbo
 toco-sdmmagpie-overlay.dtbo-base := sdmmagpie.dtb
 endif
 else
