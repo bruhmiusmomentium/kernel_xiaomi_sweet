@@ -2620,7 +2620,7 @@ static int dsi_panel_parse_bl_config(struct dsi_panel *panel)
 	}
 
 	rc = utils->read_u32(utils->data,
-			"mi,mdss-dsi-panel-dc-threshold", &val);
+			"qcom,mdss-dsi-panel-dc-threshold", &val);
 	if (rc) {
 		panel->dc_threshold = 488;
 		pr_info("default dc backlight threshold is %d\n", panel->dc_threshold);
