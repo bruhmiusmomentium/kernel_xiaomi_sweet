@@ -186,12 +186,6 @@ struct drm_panel_esd_config {
 	u32 groups;
 };
 
-#define BRIGHTNESS_ALPHA_PAIR_LEN 2
-struct brightness_alpha_pair {
-	u32 brightness;
-	u32 alpha;
-};
-
 struct dsi_panel {
 	const char *name;
 	const char *type;
@@ -247,9 +241,6 @@ struct dsi_panel {
 	u32 doze_backlight_threshold;
 
 	int hbm_mode;
-
-	struct brightness_alpha_pair *fod_dim_lut;
-	u32 fod_dim_lut_count;
 
 	u32 last_bl_lvl;
 	u32 backlight_demura_level; /* For the f4_41 panel */
@@ -380,10 +371,6 @@ int dsi_panel_parse_esd_reg_read_configs(struct dsi_panel *panel);
 void dsi_panel_ext_bridge_put(struct dsi_panel *panel);
 
 int dsi_panel_update_lp_mode(struct dsi_panel *panel);
-
-int dsi_panel_set_fod_hbm(struct dsi_panel *panel, bool status);
-
-u32 dsi_panel_get_fod_dim_alpha(struct dsi_panel *panel);
 
 int dsi_panel_apply_hbm_mode(struct dsi_panel *panel);
 
