@@ -37,10 +37,6 @@
 
 #define DSI_MODE_MAX 5
 
-#define DEMURA_LEVEL_02 256
-#define DEMURA_LEVEL_08 11
-#define DEMURA_LEVEL_0D 1
-
 enum dsi_panel_rotation {
 	DSI_PANEL_ROTATE_NONE = 0,
 	DSI_PANEL_ROTATE_HV_FLIP,
@@ -242,14 +238,6 @@ struct dsi_panel {
 
 	int hbm_mode;
 
-	u32 last_bl_lvl;
-	u32 backlight_demura_level; /* For the f4_41 panel */
-	/* DC bkl */
-	bool dc_enable;
-	u32 dc_demura_threshold;
-	u32 dc_threshold;
-	u32 dc_type;
-	bool resend_dc;
 };
 
 static inline bool dsi_panel_ulps_feature_enabled(struct dsi_panel *panel)
@@ -373,7 +361,5 @@ void dsi_panel_ext_bridge_put(struct dsi_panel *panel);
 int dsi_panel_update_lp_mode(struct dsi_panel *panel);
 
 int dsi_panel_apply_hbm_mode(struct dsi_panel *panel);
-
-int dsi_panel_apply_dc_mode(struct dsi_panel *panel);
 
 #endif /* _DSI_PANEL_H_ */
