@@ -5046,23 +5046,6 @@ error:
 	return rc;
 }
 
-static ssize_t sysfs_fod_ui_read(struct device *dev,
-	struct device_attribute *attr, char *buf)
-{
-	struct dsi_display *display;
-	bool status;
-
-	display = dev_get_drvdata(dev);
-	if (!display) {
-		pr_err("Invalid display\n");
-		return -EINVAL;
-	}
-
-	status = atomic_read(&display->fod_ui);
-
-	return snprintf(buf, PAGE_SIZE, "%d\n", status);
-}
-
 static ssize_t sysfs_hbm_read(struct device *dev,
 		struct device_attribute *attr, char *buf)
 {
@@ -5173,10 +5156,6 @@ error:
 	return ret == 0 ? count : ret;
 }
 
-static DEVICE_ATTR(fod_ui, 0444,
-			sysfs_fod_ui_read,
-			NULL);
-
 static DEVICE_ATTR(hbm, 0644,
 			sysfs_hbm_read,
 			sysfs_hbm_write);
@@ -5186,7 +5165,6 @@ static DEVICE_ATTR(dc_enable, 0644,
 			sysfs_dc_enable_write);
 
 static struct attribute *display_fs_attrs[] = {
-	&dev_attr_fod_ui.attr,
 	&dev_attr_hbm.attr,
 	&dev_attr_dc_enable.attr,
 	NULL,
@@ -5222,13 +5200,6 @@ static int dsi_display_sysfs_deinit(struct dsi_display *display)
 
 	return 0;
 
-}
-
-void dsi_display_set_fod_ui(struct dsi_display *display, bool status)
-{
-	struct device *dev = &display->pdev->dev;
-	atomic_set(&display->fod_ui, status);
-	sysfs_notify(&dev->kobj, NULL, "fod_ui");
 }
 
 /**
@@ -5527,7 +5498,6 @@ static void dsi_display_unbind(struct device *dev,
 	}
 
 	atomic_set(&display->clkrate_change_pending, 0);
-	atomic_set(&display->fod_ui, false);
 	(void)dsi_display_sysfs_deinit(display);
 	(void)dsi_display_debugfs_deinit(display);
 
