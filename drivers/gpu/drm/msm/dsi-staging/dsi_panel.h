@@ -238,6 +238,9 @@ struct dsi_panel {
 
 	int hbm_mode;
 
+	bool dc_enable;
+	u32 dc_threshold;
+
 };
 
 static inline bool dsi_panel_ulps_feature_enabled(struct dsi_panel *panel)
