@@ -703,7 +703,6 @@ static int prefer_idle_write_wrapper(struct cgroup_subsys_state *css,
 }
 #endif
 
->>>>>>> 796e881749d2 (sched/tune: Introduce SchedTune Assist[v3])
 static struct cftype files[] = {
 #ifdef CONFIG_SCHED_WALT
 	{
@@ -764,9 +763,9 @@ static void write_default_values(struct cgroup_subsys_state *css)
 	static struct st_data st_targets[] = {
 		{ "audio-app",	0, 0, 0, 0 },
 		{ "background",	0, 0, 0, 0 },
-		{ "foreground",	0, 1, 0, 0 },
+		{ "foreground",	1, 1, 0, 0 },
 		{ "rt",		0, 0, 0, 0 },
-		{ "top-app",	1, 1, 0, 0 },
+		{ "top-app",	5, 1, 0, 0 },
 	};
 	int i;
 
